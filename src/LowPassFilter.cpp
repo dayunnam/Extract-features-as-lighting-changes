@@ -2,7 +2,7 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui/highgui_c.h>
 #define input_f "pic2.jpg"
-#define output_f "�뿪���_�̹���.jpg"
+#define output_f "´ë¿ªÅë°ú_ÀÌ¹ÌÁö.jpg"
 
 using namespace cv;
 
