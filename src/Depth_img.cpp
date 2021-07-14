@@ -150,8 +150,8 @@ Mat findMax_adjustment(InputArray Gray_img) {
 			}
 		}
 	}
-	int temp_max = max - 255;//0º¸´Ù ÀÛÀ¸¸é ÀÌ¹ÌÁö°¡ 255 À§·Î ³Ñ¾î°¡Áö ¾ÊÀ½
-	int temp_min = -min;//0º¸´Ù ÀÛÀ¸¸é ÀÌ¹ÌÁö°¡ 0 ¾Æ·¡·Î ³Ñ¾î°¡Áö ¾ÊÀ½
+	int temp_max = max - 255;//0ë³´ë‹¤ ìž‘ìœ¼ë©´ ì´ë¯¸ì§€ê°€ 255 ìœ„ë¡œ ë„˜ì–´ê°€ì§€ ì•ŠìŒ
+	int temp_min = -min;//0ë³´ë‹¤ ìž‘ìœ¼ë©´ ì´ë¯¸ì§€ê°€ 0 ì•„ëž˜ë¡œ ë„˜ì–´ê°€ì§€ ì•ŠìŒ
 
 	if (temp_max > 0 && temp_min < 0) {
 		for (int i = 0; i < height_org; i++) {
@@ -420,10 +420,10 @@ Mat extraction_depth(InputArray org_img, int _th_D) {
 	int ddepth = CV_16S;
 
 	cvtColor(_org_img, Gray_img, CV_BGR2GRAY);
-	Laplacian_img = Laplacian_func(Gray_img, ddepth); //I ¸¦ x¿Í y ¿¡ ´ëÇØ ¶óÇÃ¶ó½Ã¾È
-	grad_xy_img = diff2_xy_func(Gray_img, ddepth);//I ¸¦ x,y ¿¡ ´ëÇØ ÀÌÁß ¹ÌºÐ
-	div_float_img = div_image_f(Laplacian_img, grad_xy_img); // IÀÇ ¶óÇÃ¶ó½Ã¾È °ª°ú I ÀÇ ÀÌÁß ¹ÌºÐ°ªÀ» ³ª´² ÁÜ
-	_gradient_D_img = Cumulative_Sum_diff2_f(Gray_img, div_float_img, _th_D);//x,y ¿¡ ÀÌÁß ÀûºÐ
+	Laplacian_img = Laplacian_func(Gray_img, ddepth); //I ë¥¼ xì™€ y ì— ëŒ€í•´ ë¼í”Œë¼ì‹œì•ˆ
+	grad_xy_img = diff2_xy_func(Gray_img, ddepth);//I ë¥¼ x,y ì— ëŒ€í•´ ì´ì¤‘ ë¯¸ë¶„
+	div_float_img = div_image_f(Laplacian_img, grad_xy_img); // Iì˜ ë¼í”Œë¼ì‹œì•ˆ ê°’ê³¼ I ì˜ ì´ì¤‘ ë¯¸ë¶„ê°’ì„ ë‚˜ëˆ  ì¤Œ
+	_gradient_D_img = Cumulative_Sum_diff2_f(Gray_img, div_float_img, _th_D);//x,y ì— ì´ì¤‘ ì ë¶„
 
 	return  _gradient_D_img;
 }
@@ -462,11 +462,11 @@ int main(int argc, char** argv)
 	blur(org_img, blur_img, Size(blur_size, blur_size));
 	//blur_img = remove_noise(org_img);
 	//imwrite("removed_img.jpg", blur_img);
-	//gradient_D_img = extraction_depth(blur_img, diff_th_D);//depth ÃßÃâ
+	//gradient_D_img = extraction_depth(blur_img, diff_th_D);//depth ì¶”ì¶œ
 	//convertScaleAbs(gradient_D_img, abs_gradient_D_img);
-	//imwrite(output_D_f, gradient_D_img);//Ãâ·Â ÀÌ¹ÌÁö
+	//imwrite(output_D_f, gradient_D_img);//ì¶œë ¥ ì´ë¯¸ì§€
 	white_img = extraction_white(blur_img, diff_th_W_around, diff_th_W_cur);
-	imwrite(output_W_f, white_img);//Ãâ·Â ÀÌ¹ÌÁö
+	imwrite(output_W_f, white_img);//ì¶œë ¥ ì´ë¯¸ì§€
 
 							//wait for 100 seconds
 	waitKey(100000);
